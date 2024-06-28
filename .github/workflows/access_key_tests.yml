@@ -1,4 +1,3 @@
-
 name: Access-Key-Manager-Platform CI
 
 on:
@@ -47,10 +46,12 @@ jobs:
       - name: Run migrations
         run: |
           python manage.py migrate
+        working-directory: ./access_key_manager
 
       - name: Run tests
         run: |
           python manage.py test
+        working-directory: ./access_key_manager
         
         env:
           DEBUG: ${{ secrets.DEBUG }}
