@@ -59,5 +59,6 @@ jobs:
           EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
           EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
           EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
+          EMAIL_USE_SSL: ${{ secrets.EMAIL_USE_SSL }}
           EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
           EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}

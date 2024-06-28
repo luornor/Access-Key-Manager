@@ -27,8 +27,16 @@ SECRET_KEY = config('SECRET_KEY',default='django-insecure-xy*#tdm5&*#64bpggag+^=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+###### EMAIL CONFIGURATION ######
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Application definition
 
@@ -39,6 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'django_browser_reload',
+    'theme',
+    'accounts',
+    'keymanager'
 ]
 
 MIDDLEWARE = [
@@ -46,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -53,10 +67,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'access_key_manager.urls'
 
+TAILWIND_APP_NAME = 'theme'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +86,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'access_key_manager.wsgi.application'
+
+NPM_BIN_PATH = config('NPM_BIN_PATH', default='/usr/local/bin/npm')
 
 
 # Database
@@ -103,9 +121,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -114,6 +141,16 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
 
 
 # Static files (CSS, JavaScript, Images)

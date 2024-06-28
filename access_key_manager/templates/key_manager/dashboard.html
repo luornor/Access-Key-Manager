@@ -1,0 +1,61 @@
+
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="{% static 'css/verify_email.css' %}" rel="stylesheet">
+
+    {% tailwind_css %}
+</head>
+
+<body class="bg-gray-200">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <div class="w-1/4 h-screen bg-purple-800 text-white p-4">
+            <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+            <ul>
+                <li class="mb-4"><a href="#" class="text-gray-300 hover:text-white hover:bg-red-300 hover:rounded-lg hover:px-4 hover:py-2 transition duration-300 ease-in-out">Generate Key</a></li>
+                <li><a href="{% url 'login' %}" class="text-gray-300 hover:text-white hover:bg-red-300 hover:rounded-lg hover:px-4 hover:py-2 transition duration-300 ease-in-out">Logout</a></li>
+            </ul>
+        </div>
+        <!-- Main Content -->
+        <div class="w-3/4 p-8">
+            <h1 class="text-3xl font-bold mb-6">Welcome to the Access Key Manager</h1>
+            <div class="bg-purple-200 shadow-md rounded p-4">
+                <h2 class="text-xl font-bold mb-4">Your Access Keys</h2>
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class=" alert alert-{{ message.tags }} p-4 mb-4 text-sm rounded" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-200">Key</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Status</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Date Procured</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Expiry Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+
+</html>

@@ -1,0 +1,66 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="{% static 'css/verify_email.css' %}" rel="stylesheet">
+
+    {% tailwind_css %}
+</head>
+<body>
+    <div class="flex">
+        <div class="w-1/4 h-screen bg-purple-800 text-white p-4">
+            <h2 class="text-2xl font-bold mb-6">Admin Dashboard</h2>
+            <ul>
+                <li class="mb-5"><a href="{% url 'logout' %}" class="text-gray-300 hover:text-white hover:bg-purple-400 hover:rounded-xl hover:px-4 hover:py-2 transition duration-300 ease-in-out">Logout</a></li>
+                <li><a href="{% url 'key_status' %}" class="text-gray-300 hover:text-white hover:bg-purple-400 hover:rounded-xl hover:px-4 hover:py-2 transition duration-300 ease-in-out">API</a></li>
+            </ul>
+        </div>
+        <div class="w-3/4 p-8 bg-purple-200">
+            <h1 class="text-3xl font-bold mb-6">Welcome, {{ user.username }}</h1>
+            <div class="bg-purple-300 shadow-md rounded p-4">
+                <h2 class="text-xl font-bold mb-4">All Access Keys</h2>
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class=" alert alert-{{ message.tags }} p-4 mb-4 text-sm rounded" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-200">User</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Key</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Status</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Date Procured</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Expiry Date</th>
+                            <th class="py-2 px-4 border-b border-gray-200">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key in keys %}
+                        <tr>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ key.user.email }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ key.key }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ key.status }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ key.date_procured }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ key.expiry_date }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">
+                                <a href="{% url 'admin_revoke_key' key.id %}" class="text-red-500 hover:text-red-700 hover:rounded-lg hover:bg-red-200">Revoke</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src ='{% static "js/main.js" %}'></script>        
+</body>
+</html>
