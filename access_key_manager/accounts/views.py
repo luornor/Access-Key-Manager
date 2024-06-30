@@ -6,10 +6,14 @@ from django.views import View
 from django.template.loader import render_to_string 
 from django.utils.html import strip_tags
 from .models import EmailVerification
-from .forms import CustomSignUpForm,CustomLoginForm
+from .forms import CustomSignUpForm,CustomLoginForm, StyledPasswordResetForm, CustomSetPasswordForm
 from .utils import generate_activation_code, send_verification_email, get_code
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (
+    PasswordResetView,
+    PasswordResetConfirmView
+)
 # Create your views here.
 
 
@@ -125,3 +129,16 @@ class LogoutView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         logout(request)
         return redirect('home')
+    
+
+# Password reset view
+class CustomPasswordResetView(PasswordResetView):
+    form_class = StyledPasswordResetForm
+    template_name = 'accounts/password_reset_form.html'
+    success_url = reverse_lazy('password_reset_done')  # Redirect after successful password reset
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = CustomSetPasswordForm
+    template_name = 'accounts/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete') 

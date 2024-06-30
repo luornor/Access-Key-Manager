@@ -1,11 +1,9 @@
 from django.test import TestCase, Client
-from django.urls import resolve, reverse
-
+from django.urls import reverse
 from .models import CustomUser, EmailVerification
 from .utils import generate_activation_code
 from django.utils import timezone
 from datetime import timedelta
-from . import views
 
 # get Requests
 class UserViewsTestCase(TestCase):
@@ -46,6 +44,8 @@ class UserViewsTestCase(TestCase):
 
 
 # Post Requests
+import logging
+
 class AccountAuthTestCase(TestCase):
 
     def setUp(self):
@@ -56,7 +56,9 @@ class AccountAuthTestCase(TestCase):
         self.logout_url = reverse('logout')
         self.home_url = reverse('home')
         self.dashboard_url = reverse('dashboard')
-
+        self.reset_url = reverse('password_reset')
+        self.password_reset_done = reverse('password_reset_done')
+        self.password_reset_complete = reverse('password_reset_complete')
         # Create a test user
         self.test_user = CustomUser.objects.create_user(
             email='testuser@example.com',
@@ -77,8 +79,6 @@ class AccountAuthTestCase(TestCase):
         # Ensure the email verification code is created for the new user
         new_user = CustomUser.objects.get(email='newuser@example.com')
         self.assertTrue(EmailVerification.objects.filter(user=new_user).exists())
-
-
 
     def test_code_verification_view_post(self):
         generated_code = generate_activation_code()
@@ -113,3 +113,11 @@ class AccountAuthTestCase(TestCase):
         response = self.client.post(self.logout_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(self.home_url, response.url)
+
+    def test_password_reset_request(self):
+        response = self.client.get(self.reset_url)
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(self.reset_url, {'email': 'test@example.com'})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('password_reset_done'))
+
