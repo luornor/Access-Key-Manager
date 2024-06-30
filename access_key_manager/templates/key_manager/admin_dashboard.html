@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="w-3/4 p-8 bg-purple-200">
-            <h1 class="text-3xl font-bold mb-6">Welcome, {{ user.username }}</h1>
+            <h1 class="text-3xl font-bold mb-6">Welcome, to the Access Key Manager</h1>
             <div class="bg-purple-300 shadow-md rounded p-4">
                 <h2 class="text-xl font-bold mb-4">All Access Keys</h2>
                 {% if messages %}
@@ -44,7 +44,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for key in keys %}
+                        {% for key in all_keys %}
                         <tr>
                             <td class="py-2 px-4 border-b border-gray-200">{{ key.user.email }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ key.key }}</td>
@@ -52,7 +52,10 @@
                             <td class="py-2 px-4 border-b border-gray-200">{{ key.date_procured }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ key.expiry_date }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">
-                                <a href="{% url 'admin_revoke_key' key.id %}" class="text-red-500 hover:text-red-700 hover:rounded-lg hover:bg-red-200">Revoke</a>
+                                <form action="{% url 'admin_revoke_key' key.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-red-500 hover:text-red-700 hover:rounded-lg hover:bg-red-200">Revoke</button>
+                                </form>
                             </td>
                         </tr>
                         {% endfor %}

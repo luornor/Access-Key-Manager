@@ -14,15 +14,14 @@
 
 <body class="flex items-center justify-center h-screen bg-purple-300">
 
-    <div class="flex bg-white shadow-2xl rounded-lg w-3/4 overflow-hidden ">
-
+    <div class="flex bg-white shadow-2xl rounded-lg w-3/4 overflow-hidden md:flex-row flex-col">
 
         <!-- Login Form Section -->
-        <div class="w-1/2 p-8 flex items-center justify-center">
+        <div class="md:w-1/2 w-full p-8 flex items-center justify-center">
             <div class="w-full">
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} border  px-4 py-3 rounded relative" role="alert">
+                        <div class="alert alert-{{ message.tags }} border px-4 py-3 rounded relative" role="alert">
                             <p>{{ message }}</p>
                             <span
                                 class="alert-close"
@@ -30,7 +29,7 @@
                             </span>
                         </div>
                     {% endfor %}
-                    {% endif %}
+                {% endif %}
                 <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
                 <form method="POST">
                     {% csrf_token %}
@@ -44,11 +43,10 @@
                             {% for error in field.errors %}
                                 <p class="text-red-500 text-xs italic">{{ error }}</p>
                             {% endfor %}
-
                         </div>
                     {% endfor %}
                     <div class="flex items-center justify-end mb-5">
-                        <a href="#" class="text-sm text-purple-500 hover:text-purple-700">Forgot Password?</a>
+                        <a href="{% url 'password_reset' %}" class="text-sm text-purple-500 hover:text-purple-700">Forgot Password?</a>
                     </div>
                     <div class="flex items-center justify-between">
                         <button class="bg-purple-500 hover:bg-purple-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
@@ -66,8 +64,8 @@
         </div>
 
         <!-- Image Section -->
-        <div class="w-1/2">
-            <img src="{% static 'images/login_pic.jpeg' %}" alt="Login Image" class="w-auto  md:w-full h-full object-cover">
+        <div class="md:w-1/2 w-full hidden md:block">
+            <img src="{% static 'images/login_pic.jpeg' %}" alt="Login Image" class="w-full h-full object-cover">
         </div>
     </div>
 

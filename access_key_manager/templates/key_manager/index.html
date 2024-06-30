@@ -9,7 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     {% tailwind_css %}
+    <style>
+        .btn {
+            border: 2px solid #7e22ce;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
 
+        .btn:hover {
+            background-color: #7e22ce;
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="bg-white min-h-screen flex items-center justify-center">
@@ -18,16 +28,18 @@
             <img src="{% static 'images/background.jpeg' %}" alt="Background" class="object-cover rounded-2xl w-full ml-2 h-[90%]" />
         </div>
         <div class="w-full flex items-center justify-center md:w-1/2 p-6 md:p-0">
-            <div class="flex flex-col md:flex-row md:justify-center">
-                <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="object-cover mb-4 md:mb-0 md:mr-4" style="height: 50px; width: 50px" />
-                <div class="text-center md:text-left mt-14 md:mt-0 ml-0 font-nunito">
-                    <h2 class="font-semibold text-gray-700 text-2xl">
-                        Welcome to Access Key Manager
-                    </h2>
-                    <div class="space-x-4 mt-4 justify-center">
-                        <a href="{% url 'login' %}" class="bg-white text-purple-600 px-6 py-3 outline-blue-50 rounded shadow hover:bg-purple-800 hover:text-white">Login</a>
-                        <a href="{% url 'signup' %}" class="bg-white text-purple-600 px-6 py-3 rounded shadow hover:bg-purple-800 hover:text-white">Signup</a>
-                    </div>
+            <div class="flex flex-col justify-center md:flex-col md:items-center">
+                <div class="flex justify-center items-center">
+                    <img src="{% static 'images/logo.jpeg' %}" alt="Logo" class="object-cover mb-4 sm:justify-center" style="height: 50px; width: 50px" />
+                </div>
+                <div class="flex justify-center items-center flex-wrap font-bold text-gray-700 text-2xl mb-10">
+                        <h2 class="">
+                            Welcome to Access Key Manager
+                        </h2>
+                </div>
+                <div class="space-x-4 mt-4 flex justify-center items-center font-nunito ">
+                    <a href="{% url 'login' %}" class="border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg shadow transition duration-300 ease-in-out hover:bg-purple-800 hover:text-white">Login</a>
+                    <a href="{% url 'signup' %}" class="border-2  border-purple-600 text-purple-600 px-6 py-3 rounded-lg shadow transition duration-300 ease-in-out hover:bg-purple-800 hover:text-white">Signup</a>
                 </div>
             </div>
         </div>

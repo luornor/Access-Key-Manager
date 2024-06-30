@@ -30,14 +30,12 @@ class CustomSignUpForm(UserCreationForm):
             if self.fields[fieldname]==self.fields['password1']:
                 self.fields[fieldname].widget.attrs.update({
                     'placeholder': f'Enter your Password',
-                    'data-toggle': 'password'
                 })
 
             if self.fields[fieldname]==self.fields['password2']:
                 self.fields[fieldname].label  = "Confirm Password"
                 self.fields[fieldname].widget.attrs.update({
                     'placeholder': f'Confirm your Password',
-                    'data-toggle': 'password'
                 })
 
 
@@ -50,7 +48,6 @@ class CustomLoginForm(forms.Form):
     password = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={
         'class': 'w-full py-2 px-3 border-b-1 border-gray-300 bg-gray-300 focus:border-purple-300 focus:outline-none',
         'placeholder': 'Enter your Password',
-        'data-toggle': 'password'
     }))
     
 

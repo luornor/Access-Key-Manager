@@ -7,11 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Code</title>
-   <link href="{% static 'css/verify_email.css' %}" rel="stylesheet">
+    <link href="{% static 'css/verify_email.css' %}" rel="stylesheet">
     {% tailwind_css %}
+    <style>
+        .code-input {
+            width: 2.5rem;
+            height: 2.5rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            border: 1px solid #d1d5db; 
+            border-radius: 0.25rem;
+        }
+    </style>
 </head>
 <body class="bg-purple-50 flex items-center justify-center min-h-screen">
-    <section class="flex flex-col lg:flex-row items-center w-full bg-white">
+    <div class="flex flex-col lg:flex-row items-center w-full bg-white">
         <div class="absolute top-10 left-10 z-10">
             <a href="{% url 'home' %}" class="text-black text-xl font-semibold hover:text-purple-600">
                 <p>Access Key Manager</p>
@@ -23,12 +33,12 @@
             <span class="alert-close cursor-pointer text-white text-xl" onclick="this.parentElement.style.display='none';">&times;</span>
         </div>
         {% endfor %}
-        <div class="w-full lg:w-2/5 h-full flex items-center justify-center bg-white">
-            <div class="verification-form ">
+        <div class="w-full lg:w-1/2 h-full flex items-center justify-center bg-white">
+            <div class="verification-form p-8 bg-white shadow-2xl rounded-lg">
                 <h1 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Enter Verification Code</h1>
-                <form action="{% url 'verify' %}" method="POST" class="space-y-6 shadow-xl outline-2 p-4 rounded-lg">
+                <form action="{% url 'verify' %}" method="POST" class="space-y-6">
                     {% csrf_token %}
-                    <div class="code-inputs">
+                    <div class="code-inputs flex justify-center space-x-2">
                         <input type="text" name="input1" maxlength="1" class="code-input" required />
                         <input type="text" name="input2" maxlength="1" class="code-input" required />
                         <input type="text" name="input3" maxlength="1" class="code-input" required />
@@ -36,14 +46,14 @@
                         <input type="text" name="input5" maxlength="1" class="code-input" required />
                         <input type="text" name="input6" maxlength="1" class="code-input" required />
                     </div>
-                    <button type="submit">Verify</button>         
+                    <button type="submit" class="bg-purple-500 w-full py-2 px-4 text-white focus:outline-none focus:shadow-outline font-bold rounded">Verify</button>         
                 </form>
             </div>
         </div>
-        <div class="hidden lg:block w-full lg:w-3/5 h-auto overflow-hidden">
-            <img src="{% static 'images/verify-img.jpeg' %}" alt="young-man-smiling" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110">
+        <div class="hidden md:block  md:w-1/2 h-auto">
+            <img src="{% static 'images/verify-img.jpeg' %}" alt="young-girl-smiling" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110">
         </div>
-    </section>
+    </div>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
