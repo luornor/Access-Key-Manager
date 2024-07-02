@@ -88,4 +88,4 @@ The project uses GitHub Actions for Continuous Integration (CI). The workflow is
 
 
 ## 📊 ER DIAGRAM
-![image]()
+(![image](https://github.com/luornor/Access-Key-Manager/assets/87794745/3e1e8387-dbe9-4b55-bd95-4b00550c95ed)
