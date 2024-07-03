@@ -44,11 +44,11 @@ Micro-Focus Inc., a software company, has built a school management platform tha
 ### Installation
 1. Clone the repository
 ```
-git clone https://github.com/Mustapha7018/Video-Platform.git
+git clone [https://github.com/luornor/Access-Key-Manager.git](https://github.com/luornor/Access-Key-Manager.git)
 ```
 2. Navigate to the project directory
 ```
-cd Video-Platform
+cd Access-Key-Manager
 ```
 3. Install dependencies
 ```
