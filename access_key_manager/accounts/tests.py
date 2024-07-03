@@ -108,9 +108,9 @@ class AccountAuthTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.dashboard_url)
 
-    def test_logout_view_post(self):
+    def test_logout_view_get(self):
         self.client.login(email='testuser@example.com', password='password1234')
-        response = self.client.post(self.logout_url)
+        response = self.client.get(self.logout_url)
         self.assertEqual(response.status_code, 302)
         self.assertIn(self.home_url, response.url)
 

@@ -10,23 +10,23 @@
 
     {% tailwind_css %}
 </head>
-<body>
-    <div class="flex">
-        <div class="w-1/4 h-screen bg-purple-800 text-white p-4">
+<body class="bg-gray-100">
+    <div class="flex flex-col lg:flex-row">
+        <div class="w-full h-[5%] lg:w-1/4 lg:h-screen bg-purple-800 text-white p-4">
             <h2 class="text-2xl font-bold mb-6">Admin Dashboard</h2>
             <ul>
                 <li class="mb-5"><a href="{% url 'logout' %}" class="text-gray-300 hover:text-white hover:bg-purple-400 hover:rounded-xl hover:px-4 hover:py-2 transition duration-300 ease-in-out">Logout</a></li>
                 <li><a href="{% url 'key_status' %}" class="text-gray-300 hover:text-white hover:bg-purple-400 hover:rounded-xl hover:px-4 hover:py-2 transition duration-300 ease-in-out">API</a></li>
             </ul>
         </div>
-        <div class="w-3/4 p-8 bg-purple-200">
-            <h1 class="text-3xl font-bold mb-6">Welcome, to the Access Key Manager</h1>
-            <div class="bg-purple-300 shadow-md rounded p-4">
+        <div class="w-full lg:w-3/4 p-8 bg-purple-200">
+            <h1 class="text-3xl font-bold mb-6">Welcome to the Access Key Manager</h1>
+            <div class="bg-purple-300 shadow-md rounded p-4 overflow-x-auto">
                 <h2 class="text-xl font-bold mb-4">All Access Keys</h2>
                 {% if messages %}
                 <div class="mb-4">
                     {% for message in messages %}
-                    <div class=" alert alert-{{ message.tags }} p-4 mb-4 text-sm rounded" role="alert">
+                    <div class="alert alert-{{ message.tags }} p-4 mb-4 text-sm rounded" role="alert">
                         {{ message }}
                     </div>
                     {% endfor %}
@@ -64,6 +64,6 @@
             </div>
         </div>
     </div>
-    <script src ='{% static "js/main.js" %}'></script>        
+    <script src='{% static "js/main.js" %}'></script>        
 </body>
 </html>

@@ -12,37 +12,25 @@
     {% tailwind_css %}
 </head>
 
-<body class="flex items-center justify-center h-screen bg-purple-300">
-
+<body class="flex flex-col items-center justify-center h-screen bg-purple-300">
     <div class="flex bg-white shadow-2xl rounded-lg w-3/4 overflow-hidden md:flex-row flex-col">
-
         <!-- Login Form Section -->
         <div class="md:w-1/2 w-full p-8 flex items-center justify-center">
             <div class="w-full">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} border px-4 py-3 rounded relative" role="alert">
-                            <p>{{ message }}</p>
-                            <span
-                                class="alert-close"
-                                onclick="this.parentElement.style.display='none';">&times;
-                            </span>
+                            <span class="block sm:inline">{{ message }}</span>
                         </div>
                     {% endfor %}
                 {% endif %}
-                <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
                 <form method="POST">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {{ field }}
-                            {% if field.help_text %}
-                                <p class="text-xs text-gray-500">{{ field.help_text }}</p>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <p class="text-red-500 text-xs italic">{{ error }}</p>
-                            {% endfor %}
                         </div>
                     {% endfor %}
                     <div class="flex items-center justify-end mb-5">

@@ -27,14 +27,14 @@
                 <p>Access Key Manager</p>
             </a>
         </div>
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} fixed top-5 left-1/2 transform -translate-x-1/2 w-11/12 md:w-4/5 lg:max-w-lg p-4 rounded flex items-center justify-between z-50">
-            <p>{{ message }}</p>
-            <span class="alert-close cursor-pointer text-white text-xl" onclick="this.parentElement.style.display='none';">&times;</span>
-        </div>
-        {% endfor %}
         <div class="w-full lg:w-1/2 h-full flex items-center justify-center bg-white">
             <div class="verification-form p-8 bg-white shadow-2xl rounded-lg">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} fixed top-5 left-1/2 transform -translate-x-1/2 w-11/12 md:w-4/5 lg:max-w-lg p-4 rounded flex items-center justify-between z-50">
+                    <p>{{ message }}</p>
+                    <span class="alert-close cursor-pointer text-white text-xl" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+                {% endfor %}
                 <h1 class="text-2xl font-semibold text-gray-700 mb-6 text-center">Enter Verification Code</h1>
                 <form action="{% url 'verify' %}" method="POST" class="space-y-6">
                     {% csrf_token %}
