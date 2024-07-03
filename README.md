@@ -14,9 +14,9 @@ Micro-Focus Inc., a software company, has built a school management platform tha
   - Separate Dashboards for Admin and Non-Admin Users
 
 ## 📋 Deliverables
-- Source Code: Available  here on [GitHub](https://github.com/Mustapha7018/Video-Platform) with a well-written README.
+- Source Code: Available  here on [GitHub](https://github.com/luornor/Access-Key-Manager) with a well-written README.
 - ER Diagram: Included in the repository.
-- Deployed Link: [veedeo.pythonanywhere.com](https://veedeo.pythonanywhere.com/)
+- Deployed Link: [accesskey.pythonanywhere.com](https://luornor.pythonanywhere.com/)
 
 ## ER Diagram Description
   - User
