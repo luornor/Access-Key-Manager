@@ -3,7 +3,7 @@ from django.db import models
 from accounts.models import CustomUser    
     
 class AccessKey(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name='access_keys')
     key = models.CharField(max_length=100, unique=True)
     status = models.CharField(max_length=20, choices=[('active', 'Active'), ('expired', 'Expired'), ('revoked', 'Revoked')])
     date_procured = models.DateTimeField(auto_now_add=True)
