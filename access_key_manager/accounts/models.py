@@ -21,7 +21,7 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email Address field must be set')
-        email_address = self.normalize_email(email)
+        email = self.normalize_email(email)
         return self._create_user(email, password, **extra_fields)
 
     def _create_user(self, email, password, **extra_fields):
@@ -65,7 +65,7 @@ class CustomUser(AbstractUser):
 
 
 class EmailVerification(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name='email_verification')
     code = models.CharField(max_length=32, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     expiry_date =  models.DateTimeField(default=timezone.now() + timedelta(hours=24))
